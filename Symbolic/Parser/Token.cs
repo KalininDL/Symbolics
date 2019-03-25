@@ -70,6 +70,10 @@ namespace Symbolic
         IF,
         ELSE,
         WHILE,
-        FOR
+        FOR,
+        DO,
+        BREAK,
+        CONTINUE,
+        FUN
     }
 }

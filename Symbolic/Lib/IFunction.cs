@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    public interface Value 
+    interface IFunction
     {
-        double asDouble();
-
-        string asString();
+        Value execute(params Value[] args);
     }
+
 }

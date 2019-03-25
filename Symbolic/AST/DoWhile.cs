@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class While : Statement
+    class DoWhile : Statement
     {
 
         private Expression condition;
         private Statement statement;
 
-        public While(Expression condition, Statement statement)
+        public DoWhile(Expression condition, Statement statement)
         {
             this.condition = condition;
             this.statement = statement;
@@ -20,7 +20,7 @@ namespace Symbolic
 
         public void execute()
         {
-            while (condition.calculate().asDouble() != 0)
+            do
             {
                 try
                 {
@@ -35,11 +35,12 @@ namespace Symbolic
                     continue;
                 }
             }
+            while (condition.calculate().asDouble() != 0);
         }
 
         public override string ToString()
         {
-            return "while " + condition + " " + statement;
+            return "do " + statement + " while " + condition;
         }
     }
 }

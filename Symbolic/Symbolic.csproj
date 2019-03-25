@@ -46,7 +46,13 @@
     <Compile Include="AST\Assignment.cs" />
     <Compile Include="AST\BinaryOP.cs" />
     <Compile Include="AST\Block.cs" />
+    <Compile Include="AST\Break.cs" />
+    <Compile Include="AST\Continue.cs" />
+    <Compile Include="AST\DoWhile.cs" />
     <Compile Include="AST\For.cs" />
+    <Compile Include="AST\Function.cs" />
+    <Compile Include="AST\FunctionDefine.cs" />
+    <Compile Include="AST\FunctionStatement.cs" />
     <Compile Include="AST\IfStatement.cs" />
     <Compile Include="AST\LogicExpression.cs" />
     <Compile Include="AST\VariableExpressio.cs" />
@@ -56,7 +62,11 @@
     <Compile Include="AST\Statement.cs" />
     <Compile Include="AST\UnaryOP.cs" />
     <Compile Include="AST\While.cs" />
+    <Compile Include="Lib\Functions.cs" />
+    <Compile Include="Lib\IFunction.cs" />
     <Compile Include="Lib\Number.cs" />
+    <Compile Include="Lib\test.cs" />
+    <Compile Include="Lib\UserDefineFunction.cs" />
     <Compile Include="Lib\Value.cs" />
     <Compile Include="Lib\Variables.cs" />
     <Compile Include="Lib\VString.cs" />

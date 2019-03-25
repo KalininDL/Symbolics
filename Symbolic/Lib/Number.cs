@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Number : Value
+    class Number :  Value
     {
+        public static Number nil = new Number(0);
         private double value;
 
         public Number(double value)
@@ -27,10 +28,20 @@ namespace Symbolic
             return value;
         }
 
+        //public override double asDouble()
+        //{
+        //    return value;
+        //}
+
         public string asString()
         {
             return value.ToString();
         }
+
+        //public override string asString()
+        //{
+        //    return value.ToString();
+        //}
 
         public override string ToString()
         {

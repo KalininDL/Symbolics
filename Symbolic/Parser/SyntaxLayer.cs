@@ -237,6 +237,18 @@ namespace Symbolic
                 case "FOR":
                     addToken(TokenType.FOR);
                     break;
+                case "DO":
+                    addToken(TokenType.DO);
+                    break;
+                case "BRK":
+                    addToken(TokenType.BREAK);
+                    break;
+                case "CNT":
+                    addToken(TokenType.CONTINUE);
+                    break;
+                case "FUN":
+                    addToken(TokenType.FUN);
+                    break;
                 default:
                     addToken(TokenType.WORD, _word);
                     break;

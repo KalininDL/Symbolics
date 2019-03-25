@@ -24,7 +24,19 @@ namespace Symbolic
         public void execute()
         {
             for (init.execute(); end.calculate().asDouble() != 0; inc.execute())
-                statement.execute();
+                
+            try
+            {
+                    statement.execute();
+                }
+            catch (Break b)
+                {
+                    break;
+                }
+                catch (Continue)
+                {
+                    continue ;
+                }
         }
 
         public override string ToString()

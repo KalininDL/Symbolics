@@ -22,7 +22,7 @@ namespace Symbolic
                     exp = result;
                     sr.Close();
                 }
-               
+
 
             }
             catch (Exception e)
@@ -39,7 +39,7 @@ namespace Symbolic
             Statement expressions = new Parser(tokens).parse();
             Console.WriteLine(expressions.ToString());
             expressions.execute();
-            
+
             Console.Read();
         }
     }

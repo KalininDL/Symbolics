@@ -33,8 +33,35 @@ namespace Symbolic
             return primary();
         }
 
-        private Expression expression()
+        private Function function()
         {
+            string funName = consume(TokenType.WORD).Text;
+            consume(TokenType.S_BRAKET);
+            Function func = new Function(funName);
+            while (!isEquals(TokenType.E_BRACKET))
+            {
+                func.addArg(expression());
+                isEquals(TokenType.SEPARATOR);
+            }
+            return func;
+        }
+
+        private FunctionDefine funDef()
+        {
+            string funName = consume(TokenType.WORD).Text;
+            consume(TokenType.S_BRAKET);
+            List<string> argNames = new List<string>();
+            while (!isEquals(TokenType.E_BRACKET))
+            {
+                argNames.Add(consume(TokenType.WORD).Text);
+                isEquals(TokenType.SEPARATOR);
+            }
+            Statement body = statementOrCodeBlock();
+            return new FunctionDefine(funName, argNames, body);
+        }
+
+        private Expression expression()
+        {     
             return logicalOR();
         }
 
@@ -173,15 +200,19 @@ namespace Symbolic
             {
                 return new ValueExpression(Double.Parse(curr.Text));
             }
+            if (get(0).Type == TokenType.WORD && get(1).Type == TokenType.S_BRAKET)
+            {
+                return function();
+            }
+            if (isEquals(TokenType.WORD))
+            {
+                return new Variable(curr.Text);
+            }
             if (isEquals(TokenType.S_BRAKET))
             {
                 Expression result = expression();
                 isEquals(TokenType.E_BRACKET);
                 return result;
-            }
-            if (isEquals(TokenType.WORD))
-            {
-                return new Variable(curr.Text);
             }
             if (isEquals(TokenType.TEXT))
             {
@@ -189,6 +220,7 @@ namespace Symbolic
             }
             throw new InvalidOperationException();
         }
+
 
 
         public Statement parse()
@@ -228,6 +260,26 @@ namespace Symbolic
             if (isEquals(TokenType.FOR))
             {
                 return forOP();
+            }
+            if (isEquals(TokenType.BREAK))
+            {
+                return new Break();
+            }
+            if (isEquals(TokenType.CONTINUE))
+            {
+                return new Continue();
+            }
+            if (isEquals(TokenType.DO))
+            {
+                return doWhileOP();
+            }
+            if (isEquals(TokenType.FUN))
+            {
+                return funDef();
+            }
+            if (get(0).Type == TokenType.WORD && get(1).Type == TokenType.S_BRAKET)
+            {
+                return new FunctionStatement(function());
             }
             return assignment();
         }
@@ -273,6 +325,16 @@ namespace Symbolic
             return new While(condition, statement);
         }
 
+        private Statement doWhileOP()
+        {
+            Statement statement = statementOrCodeBlock();
+            consume(TokenType.WHILE);
+            Expression condition = expression();
+            
+            return new DoWhile(condition, statement);
+        }
+
+
         private Statement forOP()
         {
             Statement initialize = assignment();
@@ -283,8 +345,6 @@ namespace Symbolic
             Statement statement = statementOrCodeBlock();
             return new For(initialize, termination, increment, statement);
         }
-
-
 
 
         private Token get(int position)

@@ -37,6 +37,19 @@ namespace Symbolic
                     default: return new VString(string1 + value2.asString());
                 }
             }
+            if ((value1 is VString && value2 is Number) || (value2 is VString && value1 is Number))
+            {
+                string string1 = value1.asString();
+                switch (operation)
+                {
+                    case '+':
+                        StringBuilder builder = new StringBuilder();
+                        builder.Append(value1.asString());
+                        builder.Append(value2.asString());
+                        return new VString(builder.ToString());
+                    default: return new VString(string1 + value2.asString());
+                }
+            }
             double nA = value1.asDouble();
             double nB = value2.asDouble();
             switch (operation)

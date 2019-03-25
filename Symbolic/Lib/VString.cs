@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class VString : Value
+    class VString :  Value
     {
         private string value;
 
@@ -28,10 +28,28 @@ namespace Symbolic
             return 0;
         }
 
+        //public override double asDouble()
+        //{
+        //    try
+        //    {
+        //        return (Double.Parse(value));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //    }
+        //    return 0;
+        //}
+
         public string asString()
         {
             return value;
         }
+
+        //public override string asString()
+        //{
+        //    return value;
+        //}
 
         public override string ToString()
         {
