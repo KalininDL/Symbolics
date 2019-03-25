@@ -35,7 +35,59 @@ namespace Symbolic
 
         private Expression expression()
         {
-            return logical();
+            return logicalOR();
+        }
+
+        private Expression logicalOR()
+        {
+            Expression result = logicalAND();
+
+            while (true)
+            {
+
+                if (isEquals(TokenType.BARBAR))
+                {
+                    result = new LogicExpression(LogicExpression.Operator.OR, result, logicalAND());
+                    continue;
+                }
+                break;
+            }
+
+            return result;
+        }
+
+        private Expression logicalAND()
+        {
+            Expression result = equality();
+
+            while (true)
+            {
+
+                if (isEquals(TokenType.AMPAMP))
+                {
+                    result = new LogicExpression(LogicExpression.Operator.AND, result, equality());
+                    continue;
+                }
+                break;
+            }
+
+            return result;
+        }
+
+        private Expression equality()
+        {
+            Expression result = logical();
+
+            if (isEquals(TokenType.EQEQ))
+            {
+                return new LogicExpression(LogicExpression.Operator.EQUALS, result, logical());
+            }
+            if (isEquals(TokenType.EXCLEQ))
+            {
+                return new LogicExpression(LogicExpression.Operator.NOT_EQUALS, result, logical());
+            }
+
+            return result;
         }
 
         private Expression logical()
@@ -44,16 +96,7 @@ namespace Symbolic
 
             while (true)
             {
-                if (isEquals(TokenType.EQUALS))
-                {
-                    e = new LogicExpression(LogicExpression.Operator.EQUALS, e, addition());
-                    continue; 
-                }
-                if (isEquals(TokenType.EXCLEQ))
-                {
-                    e = new LogicExpression(LogicExpression.Operator.NOT_EQUALS, e, addition());
-                    continue;
-                }
+               
                 if (isEquals(TokenType.LESS))
                 {
                     e = new LogicExpression(LogicExpression.Operator.LT, e, addition());

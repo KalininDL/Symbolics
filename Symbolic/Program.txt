@@ -1,8 +1,1 @@
-﻿x = 45
-y = 45
-PRINT x 
-PRINT "\n"
-PRINT y 
-PRINT "\n"
-IF x < y PRINT "YEEA"
-ELSE PRINT "NOOOO"
+﻿IF (40 == 40 && 12 == 10) PRINT "YES"

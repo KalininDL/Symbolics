@@ -42,6 +42,7 @@ namespace Symbolic
             {
                 nA = boolToDoub(value1.asString().Equals(value2.asString()));
                 nB = 0;
+                return new Number(nA);
             }
             else
             {
@@ -52,7 +53,12 @@ namespace Symbolic
             switch (operation)
             {
                 case Operator.LT: result = (nA < nB); break;
+                case Operator.LTEQ: result = (nA <= nB); break;
+                case Operator.GTEQ: result = (nA >= nB); break;
                 case Operator.GT: result = (nA > nB); break;
+                case Operator.NOT_EQUALS: result = (nA != nB); break;
+                case Operator.AND: result = (nA != 0 && nB != 0); break;
+                case Operator.OR: result = (nA != 0 || nB != 0); break;
                 case Operator.EQUALS:
                 default: result = (nA == nB); break; 
             }
