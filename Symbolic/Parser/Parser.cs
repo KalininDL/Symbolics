@@ -96,7 +96,7 @@ namespace Symbolic
 
             while (true)
             {
-               
+
                 if (isEquals(TokenType.LESS))
                 {
                     e = new LogicExpression(LogicExpression.Operator.LT, e, addition());
@@ -151,12 +151,12 @@ namespace Symbolic
             {
                 if (isEquals(TokenType.MUL))
                 {
-                   e = new BinaryOP('*', e, unaryOP());
+                    e = new BinaryOP('*', e, unaryOP());
                     continue;
                 }
                 if (isEquals(TokenType.DIV))
                 {
-                   e = new BinaryOP('/', e, unaryOP());
+                    e = new BinaryOP('/', e, unaryOP());
                     continue;
                 }
                 break;
@@ -190,15 +190,26 @@ namespace Symbolic
             throw new InvalidOperationException();
         }
 
-       
-        public List<Statement> parse()
+
+        public Statement parse()
         {
-            List<Statement> result = new List<Statement>();
+            CodeBlock result = new CodeBlock();
             while (!isEquals(TokenType.END))
             {
-                result.Add(statement());
+                result.add(statement());
             }
             return result;
+        }
+
+        private Statement block()
+        {
+            CodeBlock block = new CodeBlock();
+            consume(TokenType.S_BRACE);
+            while (!isEquals(TokenType.E_BRACE))
+            {
+                block.add(statement());
+            }
+            return block;
         }
 
         private Statement statement()
@@ -210,6 +221,13 @@ namespace Symbolic
             if (isEquals(TokenType.IF))
             {
                 return ifElse();
+            }
+            if (isEquals(TokenType.WHILE)){
+                return whileOP();
+            }
+            if (isEquals(TokenType.FOR))
+            {
+                return forOP();
             }
             return assignment();
         }
@@ -227,10 +245,18 @@ namespace Symbolic
             throw new Exception("Unknown operator");
         }
 
+        private Statement statementOrCodeBlock()
+        {
+            if (get(0).Type == TokenType.S_BRACE)
+                return block();
+            else
+                return statement();
+        }
+
         private Statement ifElse()
         {
             Expression condition = expression();
-            Statement ifStatement = statement();
+            Statement ifStatement = statementOrCodeBlock();
             Statement elseStatement;
             if (isEquals(TokenType.ELSE))
             {
@@ -239,6 +265,26 @@ namespace Symbolic
             else { elseStatement = null; }
             return new IfStatement(condition, ifStatement, elseStatement);
         }
+
+        private Statement whileOP()
+        {
+            Expression condition = expression();
+            Statement statement = statementOrCodeBlock();
+            return new While(condition, statement);
+        }
+
+        private Statement forOP()
+        {
+            Statement initialize = assignment();
+            consume(TokenType.SEPARATOR);
+            Expression termination = expression();
+            consume(TokenType.SEPARATOR);
+            Statement increment = assignment();
+            Statement statement = statementOrCodeBlock();
+            return new For(initialize, termination, increment, statement);
+        }
+
+
 
 
         private Token get(int position)

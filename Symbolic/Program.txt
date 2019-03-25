@@ -1,1 +1,18 @@
-﻿IF (40 == 40 && 12 == 10) PRINT "YES"
+﻿a = 10
+b = 15
+IF (a == 10) {
+PRINT "1\n"
+PRINT "2\n"
+IF (10 == 10) {
+	PRINT "InnerCycle"
+	}
+WHL (a <= 20) {
+	PRINT a
+	PRINT "\n"
+	a = a + 1
+	}
+	FOR i = 0 : i < 10 : i = i + 1 {
+		PRINT "\n"
+		PRINT i
+	}
+}

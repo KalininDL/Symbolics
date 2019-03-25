@@ -34,7 +34,10 @@ namespace Symbolic
 
         public static void add(string key, Value value)
         {
-            variables.Add(key, value);
+            if (!variables.ContainsKey(key))
+                variables.Add(key, value);
+            else
+                variables[key] = value;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Symbolic
 {
     public class SyntaxLayer
     {
-       private static string OP_CHARS = "+-*/()=<>&|!";
+       private static string OP_CHARS = "+-*/(){}=<>&|!:";
         //private static TokenType[] OPERATORS = new TokenType[]
         //{
         //    TokenType.ADD,
@@ -33,6 +33,8 @@ namespace Symbolic
             OPERATORS.Add("/", TokenType.DIV);
             OPERATORS.Add("(", TokenType.S_BRAKET);
             OPERATORS.Add(")", TokenType.E_BRACKET);
+            OPERATORS.Add("{", TokenType.S_BRACE);
+            OPERATORS.Add("}", TokenType.E_BRACE);
             OPERATORS.Add("=", TokenType.EQUALS);
             OPERATORS.Add("==", TokenType.EQEQ);
             OPERATORS.Add("<", TokenType.LESS);
@@ -45,6 +47,7 @@ namespace Symbolic
             OPERATORS.Add("&&", TokenType.AMPAMP);
             OPERATORS.Add("|", TokenType.BAR);
             OPERATORS.Add("||", TokenType.BARBAR);
+            OPERATORS.Add(":", TokenType.SEPARATOR);
         }
         private string input;
         private int length;
@@ -227,6 +230,12 @@ namespace Symbolic
                     break;
                 case "ELSE":
                     addToken(TokenType.ELSE);
+                    break;
+                case "WHL":
+                    addToken(TokenType.WHILE);
+                    break;
+                case "FOR":
+                    addToken(TokenType.FOR);
                     break;
                 default:
                     addToken(TokenType.WORD, _word);

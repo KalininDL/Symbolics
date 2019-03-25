@@ -36,16 +36,10 @@ namespace Symbolic
             }
 
 
-            List<Statement> expressions = new Parser(tokens).parse();
-
-            foreach (Statement e in expressions)
-            {
-                Console.WriteLine(e);
-            }
-            foreach (Statement e in expressions)
-            {
-                e.execute();
-            }
+            Statement expressions = new Parser(tokens).parse();
+            Console.WriteLine(expressions.ToString());
+            expressions.execute();
+            
             Console.Read();
         }
     }

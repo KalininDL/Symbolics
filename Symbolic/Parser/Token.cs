@@ -58,12 +58,18 @@ namespace Symbolic
 
         S_BRAKET,
         E_BRACKET,
+        S_BRACE,
+        E_BRACE,
+        SEPARATOR,
+
         END,
         
 
         //keywords
         PRINT,
         IF,
-        ELSE
+        ELSE,
+        WHILE,
+        FOR
     }
 }
