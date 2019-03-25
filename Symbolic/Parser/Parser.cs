@@ -46,17 +46,32 @@ namespace Symbolic
             {
                 if (isEquals(TokenType.EQUALS))
                 {
-                    e = new LogicExpression('=', e, addition());
+                    e = new LogicExpression(LogicExpression.Operator.EQUALS, e, addition());
                     continue; 
+                }
+                if (isEquals(TokenType.EXCLEQ))
+                {
+                    e = new LogicExpression(LogicExpression.Operator.NOT_EQUALS, e, addition());
+                    continue;
                 }
                 if (isEquals(TokenType.LESS))
                 {
-                    e = new LogicExpression('<', e, addition());
+                    e = new LogicExpression(LogicExpression.Operator.LT, e, addition());
+                    continue;
+                }
+                if (isEquals(TokenType.LTEQ))
+                {
+                    e = new LogicExpression(LogicExpression.Operator.LTEQ, e, addition());
                     continue;
                 }
                 if (isEquals(TokenType.MORE))
                 {
-                    e = new LogicExpression('>', e, addition());
+                    e = new LogicExpression(LogicExpression.Operator.GT, e, addition());
+                    continue;
+                }
+                if (isEquals(TokenType.GTEQ))
+                {
+                    e = new LogicExpression(LogicExpression.Operator.GTEQ, e, addition());
                     continue;
                 }
                 break;

@@ -8,10 +8,25 @@ namespace Symbolic
 {
     class LogicExpression : Expression
     {
+        public enum Operator
+        {
+            PLUS,
+            MINUS,
+            MULTIPLY,
+            DIVIDE,
+            EQUALS,
+            NOT_EQUALS,
+            LT,
+            LTEQ,
+            GT,
+            GTEQ,
+            AND,
+            OR
+        }
         private Expression a, b;
-        private char operation;
+        private Operator operation;
 
-        public LogicExpression(char operation, Expression a, Expression b)
+        public LogicExpression(Operator operation, Expression a, Expression b)
         {
             this.a = a;
             this.b = b;
@@ -22,30 +37,37 @@ namespace Symbolic
         {
             Value value1 = a.calculate();
             Value value2 = b.calculate();
+            double nA, nB;
             if (value1 is VString)
             {
-                string string1 = value1.asString();
-                string string2 = value2.asString();
-                    switch (operation)
-                {
-                    case '<': return new Number(string1.Length < string2.Length);
-                    case '>': return new Number(string1.Length > string2.Length); 
-                    default: return new Number(string1.Equals(string2));
-                }
+                nA = boolToDoub(value1.asString().Equals(value2.asString()));
+                nB = 0;
             }
-            double nA = value1.asDouble();
-            double nB = value2.asDouble();
+            else
+            {
+                nA = value1.asDouble();
+                nB = value2.asDouble();
+            }
+            bool result;
             switch (operation)
             {
-                case '<': return new Number(nA < nB);
-                case '>': return new Number(nA > nB);
-                default: return new Number(nA == nB);
+                case Operator.LT: result = (nA < nB); break;
+                case Operator.GT: result = (nA > nB); break;
+                case Operator.EQUALS:
+                default: result = (nA == nB); break; 
             }
+            return new Number(result);
         }
 
         public override string ToString()
         {
             return String.Format("[{0} {1} {2}]", a, operation, b);
+        }
+
+        private double boolToDoub(bool x)
+        {
+            if (x == true) return 1;
+            else return 0;
         }
     }
 }

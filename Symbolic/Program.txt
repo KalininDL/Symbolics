@@ -1,4 +1,8 @@
 ﻿x = 45
-y = 66
-IF x > y PRINT x
-ELSE PRINT y
+y = 45
+PRINT x 
+PRINT "\n"
+PRINT y 
+PRINT "\n"
+IF x < y PRINT "YEEA"
+ELSE PRINT "NOOOO"
