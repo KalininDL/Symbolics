@@ -45,6 +45,16 @@ namespace Symbolic
         EQUALS,
         MORE,
         LESS,
+        LTEQ,
+        GTEQ,
+        EXL,
+        EXCLEQ,
+        BAR,
+        BARBAR,
+        AMP,
+        AMPAMP,
+        EQEQ,
+
 
         S_BRAKET,
         E_BRACKET,

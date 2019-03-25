@@ -8,19 +8,44 @@ namespace Symbolic
 {
     public class SyntaxLayer
     {
-        private static string OP_CHARS = "+-*/()=<>";
-        private static TokenType[] OPERATORS = new TokenType[]
+       private static string OP_CHARS = "+-*/()=<>";
+        //private static TokenType[] OPERATORS = new TokenType[]
+        //{
+        //    TokenType.ADD,
+        //    TokenType.SUB,
+        //    TokenType.MUL,
+        //    TokenType.DIV,
+        //    TokenType.S_BRAKET,
+        //    TokenType.E_BRACKET,
+        //    TokenType.EQUALS,
+        //    TokenType.LESS,
+        //    TokenType.MORE
+        //};
+
+        private static Dictionary<String, TokenType> OPERATORS;
+
+        private void init()
         {
-            TokenType.ADD,
-            TokenType.SUB,
-            TokenType.MUL,
-            TokenType.DIV,
-            TokenType.S_BRAKET,
-            TokenType.E_BRACKET,
-            TokenType.EQUALS,
-            TokenType.LESS,
-            TokenType.MORE
-        };
+            OPERATORS = new Dictionary<string, TokenType>();
+            OPERATORS.Add("+", TokenType.ADD);
+            OPERATORS.Add("-", TokenType.SUB);
+            OPERATORS.Add("*", TokenType.MUL);
+            OPERATORS.Add("/", TokenType.DIV);
+            OPERATORS.Add("(", TokenType.S_BRAKET);
+            OPERATORS.Add(")", TokenType.E_BRACKET);
+            OPERATORS.Add("=", TokenType.EQUALS);
+            OPERATORS.Add("==", TokenType.EQEQ);
+            OPERATORS.Add("<", TokenType.LESS);
+            OPERATORS.Add(">", TokenType.MORE);
+            OPERATORS.Add("<=", TokenType.LTEQ);
+            OPERATORS.Add(">=", TokenType.GTEQ);
+            OPERATORS.Add("!", TokenType.EXL);
+            OPERATORS.Add("!=", TokenType.EXCLEQ);
+            OPERATORS.Add("&", TokenType.AMP);
+            OPERATORS.Add("&&", TokenType.AMPAMP);
+            OPERATORS.Add("|", TokenType.BAR);
+            OPERATORS.Add("||", TokenType.BARBAR);
+        }
         private string input;
         private int length;
         private int currentPosition;
@@ -33,6 +58,7 @@ namespace Symbolic
             this.input = input;
             this.length = input.Length;
             this.tokens = new List<Token>();
+            init();
         }
 
         public List<Token> toTokens()
@@ -123,8 +149,57 @@ namespace Symbolic
 
         private void operatorToToken()
         {
-            int position = OP_CHARS.IndexOf(peek(0));
-            addToken(OPERATORS[position]);
+            char currnet = peek(0);
+            if (currnet == '/')
+            {
+                if (peek(1) == '/')
+                {
+                    next();
+                    next();
+                    commentToken();
+                    return;
+                }
+                else if (peek(1) == '*')
+                {
+                    next();
+                    next();
+                    multilineCommentToken();
+                    return;
+                }
+            }
+            StringBuilder buffer = new StringBuilder();
+            while (true)
+            {
+                string text = buffer.ToString();
+                if (!OPERATORS.ContainsKey(text+currnet) && text.Length != 0)
+                {
+                    addToken(OPERATORS[text]);
+                    return;
+                }
+                buffer.Append(currnet);
+                currnet = next();
+            }
+        }
+
+        private void commentToken()
+        {
+            char current = peek(0);
+            while ("\r\n\0".IndexOf(current) == -1)
+            {
+                current = next();
+            }
+        }
+
+        private void multilineCommentToken()
+        {
+            char current = peek(0);
+            while (true)
+            {
+                if (current == '\0') throw new Exception("End of comment missing");
+                if (current == '*' && peek(1) == '/') { break; }
+                current = next();
+            }
+            next();
             next();
         }
 

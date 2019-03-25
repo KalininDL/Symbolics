@@ -11,7 +11,7 @@ namespace Symbolic
     {
         static void Main(string[] args)
         {
-            string path = "C:\\Users\\ДАНИИЛ\\source\\repos\\Symbolic\\Symbolic\\Program.txt";
+            string path = "C:\\Users\\ДАНИИЛ\\Desktop\\Символьные\\Symbolics\\Symbolic\\Program.txt";
             string exp = "";
             try
             {

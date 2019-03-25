@@ -5,3 +5,10 @@ C:\Users\ДАНИИЛ\source\repos\Symbolic\Symbolic\bin\Debug\Symbolic.exe
 C:\Users\ДАНИИЛ\source\repos\Symbolic\Symbolic\bin\Debug\Symbolic.pdb
 C:\Users\ДАНИИЛ\source\repos\Symbolic\Symbolic\obj\Debug\Symbolic.exe
 C:\Users\ДАНИИЛ\source\repos\Symbolic\Symbolic\obj\Debug\Symbolic.pdb
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\bin\Debug\Symbolic.exe.config
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\bin\Debug\Symbolic.exe
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\bin\Debug\Symbolic.pdb
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.csprojAssemblyReference.cache
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.csproj.CoreCompileInputs.cache
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.exe
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.pdb
