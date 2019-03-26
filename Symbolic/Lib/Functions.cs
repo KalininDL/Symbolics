@@ -124,6 +124,14 @@ namespace Symbolic
         }
     }
 
+    class DrawDot : IFunction
+    {
+        public Value execute(params Value[] args)
+        {
+            return null;
+        }
+    }
+
     class Functions : IFunction
     {
         static Number nil = new Number(0);
@@ -136,6 +144,7 @@ namespace Symbolic
             functions.Add("sin", new Sin());
             functions.Add("cos", new Cos());
             functions.Add("MAKEARR", new NEWARRAY());
+            functions.Add("drawdot", new DrawDot());
             //functions.Add("echo", new Func<Value[], Value>(Echo));
         }
 

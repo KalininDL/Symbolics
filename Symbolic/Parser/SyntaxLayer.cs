@@ -8,7 +8,7 @@ namespace Symbolic
 {
     public class SyntaxLayer
     {
-       private static string OP_CHARS = "+-*/(){}[]=<>&|!:";
+       private static string OP_CHARS = "+-*/(){}[]=<>&|!:;";
         //private static TokenType[] OPERATORS = new TokenType[]
         //{
         //    TokenType.ADD,

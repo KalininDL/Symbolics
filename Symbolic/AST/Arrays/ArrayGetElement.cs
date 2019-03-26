@@ -20,7 +20,7 @@ namespace Symbolic
 
         public Value calculate()
         {
-            return getLast().get(indexes.Count - 1);
+            return getLast().get(lastIndex());
         }
 
         public Array getLast()
@@ -29,14 +29,19 @@ namespace Symbolic
             int last = indexes.Count - 1;
             for (int i = 0; i < last; i++)
             {
-                array = isArray(array.get((int)indexes[i].calculate().asDouble()));
+                array = isArray(array.get(index(i)));
             }
             return array;
         }
 
         public int lastIndex()
         {
-            return indexes.Count - 1;
+            return index(indexes.Count - 1);
+        }
+
+        public int index(int index)
+        {
+            return (int)indexes[index].calculate().asDouble();
         }
 
         private Array isArray(Value variable)

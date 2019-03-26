@@ -12,3 +12,5 @@ C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\
 C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.csproj.CoreCompileInputs.cache
 C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.exe
 C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.pdb
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.Program.resources
+C:\Users\ДАНИИЛ\Desktop\Символьные\Symbolics\Symbolic\obj\Debug\Symbolic.csproj.GenerateResource.cache

@@ -336,7 +336,7 @@ namespace Symbolic
             }
             if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.S_QBRACKET))
             {
-                string var = consume(TokenType.WORD).Text;
+                //string var = consume(TokenType.WORD).Text;
                 ArrayGetElement array = element();
                 consume(TokenType.EQUALS);
                 return new ArrayAssignementStatement(array, expression());
