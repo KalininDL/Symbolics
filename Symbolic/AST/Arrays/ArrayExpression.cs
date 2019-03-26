@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class ArrayExpression : Expression
+    public class ArrayExpression : Expression
     {
-        private List<Expression> elems;
+        public List<Expression> elems;
 
         public ArrayExpression(List<Expression> args)
         {
             this.elems = args;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public Value calculate()

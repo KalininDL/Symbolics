@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class CodeBlock : Statement
+    public class CodeBlock : Statement
     {
-        private List<Statement> statements;
+        public List<Statement> statements;
 
         public CodeBlock()
         {
@@ -18,6 +18,11 @@ namespace Symbolic
         public void add(Statement s)
         {
             statements.Add(s);
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void execute()

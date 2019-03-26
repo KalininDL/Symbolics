@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    public interface Statement : Node
+    public interface Node
     {
-        void execute();
+        void accept(Visitor visitor);
     }
 }

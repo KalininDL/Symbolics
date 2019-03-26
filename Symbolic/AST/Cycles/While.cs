@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class While : Statement
+    public class While : Statement
     {
 
-        private Expression condition;
-        private Statement statement;
+        public Expression condition;
+        public Statement statement;
 
         public While(Expression condition, Statement statement)
         {
@@ -18,6 +18,10 @@ namespace Symbolic
             this.statement = statement;
         }
 
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
+        }
         public void execute()
         {
             while (condition.calculate().asDouble() != 0)

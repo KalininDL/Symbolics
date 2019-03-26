@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class For : Statement
+    public class For : Statement
     {
-        private Statement init;
-        private Expression end;
-        private Statement inc;
-        private Statement statement;
+        public Statement init;
+        public Expression end;
+        public Statement inc;
+        public Statement statement;
 
         public For(Statement init, Expression end, Statement inc, Statement block)
         {
@@ -37,6 +37,11 @@ namespace Symbolic
                 {
                     continue ;
                 }
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public override string ToString()

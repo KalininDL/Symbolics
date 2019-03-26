@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class DoWhile : Statement
+    public class DoWhile : Statement
     {
 
-        private Expression condition;
-        private Statement statement;
+        public Expression condition;
+        public Statement statement;
 
         public DoWhile(Expression condition, Statement statement)
         {
             this.condition = condition;
             this.statement = statement;
+        }
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void execute()

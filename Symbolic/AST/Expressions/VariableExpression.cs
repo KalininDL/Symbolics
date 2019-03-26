@@ -20,6 +20,11 @@ namespace Symbolic
            return Variables.get(name);
         }
 
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
+        }
+
         public override string ToString()
         {
             return String.Format("{0}", name);

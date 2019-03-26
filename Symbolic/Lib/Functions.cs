@@ -84,11 +84,33 @@ namespace Symbolic
         }
     }
 
-    class MakeArr : IFunction
+    class NEWARRAY : IFunction
     {
         public Value execute(params Value[] args)
         {
-                return new Array(args);
+                return createArray(args, 0);
+        }
+
+        private Array createArray(Value[] args, int index)
+        {
+            int size = (int)args[index].asDouble();
+            int last = args.Length - 1;
+            Array array = new Array(size);
+            if (index == last)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    array.set(i, Number.nil);
+                }
+            }
+            else if (index < last)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    array.set(i, createArray(args, index + 1));
+                }
+            }
+            return array;
         }
     }
 
@@ -113,7 +135,7 @@ namespace Symbolic
 
             functions.Add("sin", new Sin());
             functions.Add("cos", new Cos());
-            functions.Add("MAKEARR", new MakeArr());
+            functions.Add("MAKEARR", new NEWARRAY());
             //functions.Add("echo", new Func<Value[], Value>(Echo));
         }
 

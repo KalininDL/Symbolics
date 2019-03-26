@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class UnaryOP : Expression
+    public class UnaryOP : Expression
     {
-        private Expression a;
+        public Expression a;
         private char operation;
 
         public UnaryOP(char operation, Expression a)
@@ -30,6 +30,11 @@ namespace Symbolic
         public override string ToString()
         {
             return String.Format("{0} {1} ", a, operation);
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
     }
 }

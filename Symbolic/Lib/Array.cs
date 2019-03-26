@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Array : Value
+    public class Array : Value
     {
         private Value[] elements;
 
@@ -51,16 +51,18 @@ namespace Symbolic
         public string asString()
         {
             StringBuilder builder = new StringBuilder();
+            builder.Append("[");
             foreach (Value v in elements)
             {
-                builder.Append(v).Append(" ");
+                builder.Append(v).Append(" ; ");
             }
+            builder.Append("]");
             return builder.ToString();
         }
 
         public override string ToString()
         {
-            return asString();
+            return  asString();
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Print : Statement
+    public class Print : Statement
     {
-        private Expression e;
+        public Expression e;
 
         public Print(Expression e)
         {
@@ -19,6 +19,11 @@ namespace Symbolic
         {
             Console.Write(e.calculate());
         }
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
+        }
+
 
         public override string ToString()
         {

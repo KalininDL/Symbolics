@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Break :  SystemException, Statement
+    public class Break :  SystemException, Statement
     {
-
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
+        }
         public void execute()
         {
             throw this;

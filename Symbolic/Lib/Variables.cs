@@ -32,7 +32,7 @@ namespace Symbolic
 
 
 
-        private static bool isExists(string key)
+        public static bool isExists(string key)
         {
             return variables.ContainsKey(key);
         }

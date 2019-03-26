@@ -229,7 +229,7 @@ namespace Symbolic
             throw new InvalidOperationException();
         }
 
-        private Expression element()
+        private ArrayGetElement element()
         {
             string var = consume(TokenType.WORD).Text;
             List<Expression> indexes = new List<Expression>();
@@ -337,11 +337,9 @@ namespace Symbolic
             if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.S_QBRACKET))
             {
                 string var = consume(TokenType.WORD).Text;
-                consume(TokenType.S_QBRACKET);
-                Expression index = expression();
-                consume(TokenType.E_QBRACKET);
+                ArrayGetElement array = element();
                 consume(TokenType.EQUALS);
-                return new ArrayAssignementStatement(var, index, expression());
+                return new ArrayAssignementStatement(array, expression());
 
             }
             throw new Exception("Unknown operator");

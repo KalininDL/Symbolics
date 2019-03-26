@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class ValueExpression : Expression
+    public class ValueExpression : Expression
     {
         private readonly Value value;
 
@@ -23,6 +23,11 @@ namespace Symbolic
         public Value calculate()
         {
             return value;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public override string ToString()

@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Assignment : Statement
+    public class Assignment : Statement
     {
-        private string var;
-        private Expression e;
+        public string var;
+        public Expression e;
 
         public Assignment(string var, Expression e)
         {
             this.var = var;
             this.e = e;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void execute()

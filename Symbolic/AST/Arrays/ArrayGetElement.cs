@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class ArrayGetElement : Expression
+    public class ArrayGetElement : Expression
     {
 
-        private string var;
-        private List<Expression> indexes;
+        public string var;
+        public List<Expression> indexes;
 
         public ArrayGetElement(string var, List<Expression> indexes)
         {
@@ -23,7 +23,7 @@ namespace Symbolic
             return getLast().get(indexes.Count - 1);
         }
 
-        private Array getLast()
+        public Array getLast()
         {
             Array array = isArray(Variables.get(var));
             int last = indexes.Count - 1;
@@ -32,6 +32,11 @@ namespace Symbolic
                 array = isArray(array.get((int)indexes[i].calculate().asDouble()));
             }
             return array;
+        }
+
+        public int lastIndex()
+        {
+            return indexes.Count - 1;
         }
 
         private Array isArray(Value variable)
@@ -44,6 +49,11 @@ namespace Symbolic
             {
                 throw new Exception("Not an array!");
             }
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public override string ToString()

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class BinaryOP : Expression
+    public class BinaryOP : Expression
     {
-        private Expression a, b;
+        public Expression a, b;
         private char operation;
 
         public BinaryOP(char operation, Expression a, Expression b)
@@ -16,6 +16,11 @@ namespace Symbolic
             this.a = a;
             this.b = b;
             this.operation = operation;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public Value calculate()

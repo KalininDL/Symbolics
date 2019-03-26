@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class IfStatement : Statement
+    public class IfStatement : Statement
     {
-        private Expression e;
-        private Statement ifStatement, elseStatement;
+        public Expression e;
+        public Statement ifStatement, elseStatement;
 
         public IfStatement(Expression e, Statement ifStatement, Statement elseStatement)
         {
             this.e = e;
             this.ifStatement = ifStatement;
             this.elseStatement = elseStatement;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void execute()

@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Return : SystemException, Statement
+    public class Return : SystemException, Statement
     {
-        private Expression e;
+        public Expression e;
         private Value res;
 
         public Return(Expression e)
         {
             this.e = e;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public Value getResult()

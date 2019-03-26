@@ -6,36 +6,29 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class ArrayAssignementStatement : Statement
+    public class ArrayAssignementStatement : Statement
     {
-        private string var;
-        private Expression index;
-        private Expression val;
+        public ArrayGetElement array;
+        public Expression val;
 
-        public ArrayAssignementStatement(string var, Expression index, Expression val)
+        public ArrayAssignementStatement(ArrayGetElement array, Expression val)
         {
-            this.var = var;
-            this.index = index;
+            this.array = array;
             this.val = val;
+        }
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void execute()
         {
-            Value variable = Variables.get(var);
-            if (variable is Array)
-            {
-                Array array = (Array)variable;
-                array.set((int)index.calculate().asDouble(), val.calculate());
-            }
-            else
-            {
-                throw new Exception("Not an array!");
-            }
+            array.getLast().set(array.lastIndex(), val.calculate());
         }
 
         public override string ToString()
         {
-            return var + "["+index+"]" + " = " + val;
+            return array.ToString() + val;
         }
     }
 }

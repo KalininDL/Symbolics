@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class LogicExpression : Expression
+    public class LogicExpression : Expression
     {
         public enum Operator
         {
@@ -23,7 +23,7 @@ namespace Symbolic
             AND,
             OR
         }
-        private Expression a, b;
+        public Expression a, b;
         private Operator operation;
 
         public LogicExpression(Operator operation, Expression a, Expression b)
@@ -68,6 +68,11 @@ namespace Symbolic
         public override string ToString()
         {
             return String.Format("[{0} {1} {2}]", a, operation, b);
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         private double boolToDoub(bool x)

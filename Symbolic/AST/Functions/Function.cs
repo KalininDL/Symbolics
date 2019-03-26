@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class Function : Expression
+    public class Function : Expression
     {
-        private string name;
-        private List<Expression> args;
+        public string name;
+        public List<Expression> args;
 
         public Function(string name)
         {
@@ -21,6 +21,11 @@ namespace Symbolic
         {
             this.name = name;
             this.args = args;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void addArg(Expression arg)

@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class FunctionDefine : Statement
+    public class FunctionDefine : Statement
     {
         private string name;
         private List<string> arhNames;
-        private Statement body;
+        public Statement body;
 
         public FunctionDefine(string name, List<string> arhNames, Statement body)
         {
             this.name = name;
             this.arhNames = arhNames;
             this.body = body;
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public void execute()

@@ -38,6 +38,8 @@ namespace Symbolic
 
             Statement expressions = new Parser(tokens).parse();
             Console.WriteLine(expressions.ToString());
+            expressions.accept(new FunctionAdder());
+            expressions.accept(new AssignValidator());
             expressions.execute();
 
             Console.Read();

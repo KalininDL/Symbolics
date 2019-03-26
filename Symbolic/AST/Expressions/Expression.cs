@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    public interface Expression
+    public interface Expression : Node
     {
         Value calculate();
     }

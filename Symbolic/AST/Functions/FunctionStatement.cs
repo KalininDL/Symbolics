@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic
 {
-    class FunctionStatement : Statement
+    public class FunctionStatement : Statement
     {
         private Function func;
 
@@ -18,6 +18,11 @@ namespace Symbolic
         public void execute()
         {
             func.calculate();
+        }
+
+        public void accept(Visitor visitor)
+        {
+            visitor.visit(this);
         }
 
         public override string ToString()
