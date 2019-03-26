@@ -41,10 +41,15 @@ namespace Symbolic
             {
                 UserDefineFunction udef = (UserDefineFunction)func;
                 if (size != udef.getArgsCount()) throw new Exception("!");
+
+                Variables.push();
                 for (int i = 0; i < size; i++)
                 {
                     Variables.add(udef.getArgsName(i), vals[i]);
                 }
+                Value result = udef.execute(vals);
+                Variables.pop();
+                return (result);
             }
             //Function func = Functions.get(name);
             //if

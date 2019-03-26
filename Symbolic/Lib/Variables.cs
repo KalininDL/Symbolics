@@ -10,13 +10,27 @@ namespace Symbolic
     {
         static Number nil = new Number(0);
         private static Dictionary<String, Value> variables;
+        private static Stack<Dictionary<String, Value>> stack;
 
         static Variables()
         {
+            stack = new Stack<Dictionary<string, Value>>();
             variables = new Dictionary<string, Value>();
             variables.Add("pi", new Number(Math.PI));
             variables.Add("e", new Number(Math.E));
         }
+
+        public static void push()
+        {
+            stack.Push(new Dictionary<string, Value>(variables));
+        }
+
+        public static void pop()
+        {
+            variables = stack.Pop();
+        }
+
+
 
         private static bool isExists(string key)
         {

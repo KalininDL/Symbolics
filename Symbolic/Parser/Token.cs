@@ -55,7 +55,8 @@ namespace Symbolic
         AMPAMP,
         EQEQ,
 
-
+        S_QBRACKET,
+        E_QBRACKET,
         S_BRAKET,
         E_BRACKET,
         S_BRACE,
@@ -74,6 +75,7 @@ namespace Symbolic
         DO,
         BREAK,
         CONTINUE,
-        FUN
+        FUN,
+        RETURN
     }
 }

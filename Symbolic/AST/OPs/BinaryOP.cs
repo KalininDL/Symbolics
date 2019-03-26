@@ -22,7 +22,7 @@ namespace Symbolic
         {
             Value value1 = a.calculate();
             Value value2 = b.calculate();
-            if (value1 is VString) {
+            if ((value1 is VString) || (value1 is Array)) {
                 string string1 = value1.asString();
                 switch (operation)
                 {            

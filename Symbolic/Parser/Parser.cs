@@ -200,9 +200,17 @@ namespace Symbolic
             {
                 return new ValueExpression(Double.Parse(curr.Text));
             }
-            if (get(0).Type == TokenType.WORD && get(1).Type == TokenType.S_BRAKET)
+            if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.S_BRAKET))
             {
                 return function();
+            }
+            if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.S_QBRACKET))
+            {
+                return element();
+            }
+            if (lookMatch(0, TokenType.S_QBRACKET))
+            {
+                return array();
             }
             if (isEquals(TokenType.WORD))
             {
@@ -220,6 +228,32 @@ namespace Symbolic
             }
             throw new InvalidOperationException();
         }
+
+        private Expression element()
+        {
+            string var = consume(TokenType.WORD).Text;
+            List<Expression> indexes = new List<Expression>();
+            do
+            {
+                consume(TokenType.S_QBRACKET);
+                indexes.Add(expression());
+                consume(TokenType.E_QBRACKET);
+            } while (lookMatch(0, TokenType.S_QBRACKET));
+            return new ArrayGetElement(var, indexes);
+        }
+
+        private Expression array()
+        {
+            consume(TokenType.S_QBRACKET);
+            List<Expression> elements = new List<Expression>();
+            while (!isEquals(TokenType.E_QBRACKET))
+            {
+                elements.Add(expression());
+                isEquals(TokenType.SEPARATOR);
+            }
+            return new ArrayExpression(elements);
+        }
+
 
 
 
@@ -265,6 +299,10 @@ namespace Symbolic
             {
                 return new Break();
             }
+            if (isEquals(TokenType.RETURN))
+            {
+                return new Return(expression());
+            }
             if (isEquals(TokenType.CONTINUE))
             {
                 return new Continue();
@@ -277,7 +315,7 @@ namespace Symbolic
             {
                 return funDef();
             }
-            if (get(0).Type == TokenType.WORD && get(1).Type == TokenType.S_BRAKET)
+            if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.S_BRAKET))
             {
                 return new FunctionStatement(function());
             }
@@ -286,20 +324,32 @@ namespace Symbolic
 
         private Statement assignment()
         {
-            Token curr = get(0);
-            if (isEquals(TokenType.WORD) && get(0).Type == TokenType.EQUALS)
+            //Token curr = get(0);
+            //Token curr1 = get(1);
+            Console.WriteLine();
+            if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.EQUALS))
             {
                 //consume(TokenType.WORD);
-                string var = curr.Text;
+                string var = consume(TokenType.WORD).Text;
                 consume(TokenType.EQUALS);
                 return new Assignment(var, expression());
+            }
+            if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.S_QBRACKET))
+            {
+                string var = consume(TokenType.WORD).Text;
+                consume(TokenType.S_QBRACKET);
+                Expression index = expression();
+                consume(TokenType.E_QBRACKET);
+                consume(TokenType.EQUALS);
+                return new ArrayAssignementStatement(var, index, expression());
+
             }
             throw new Exception("Unknown operator");
         }
 
         private Statement statementOrCodeBlock()
         {
-            if (get(0).Type == TokenType.S_BRACE)
+            if (lookMatch(0, TokenType.S_BRACE))
                 return block();
             else
                 return statement();
@@ -354,6 +404,12 @@ namespace Symbolic
             if (pos >= size) { return END; }
 
             return tokens[pos];
+        }
+
+        private bool lookMatch(int pos, TokenType type)
+        {
+            Console.WriteLine("--" + get(pos).Type);
+            return get(pos).Type == type;
         }
 
         private bool isEquals(TokenType type)

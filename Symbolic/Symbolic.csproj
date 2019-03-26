@@ -43,29 +43,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AST\Assignment.cs" />
-    <Compile Include="AST\BinaryOP.cs" />
+    <Compile Include="AST\Arrays\ArrayAssignementStatement.cs" />
+    <Compile Include="AST\Arrays\ArrayExpression.cs" />
+    <Compile Include="AST\Arrays\ArrayGetElement.cs" />
+    <Compile Include="AST\Statements\Assignment.cs" />
+    <Compile Include="AST\OPs\BinaryOP.cs" />
     <Compile Include="AST\Block.cs" />
-    <Compile Include="AST\Break.cs" />
-    <Compile Include="AST\Continue.cs" />
-    <Compile Include="AST\DoWhile.cs" />
-    <Compile Include="AST\For.cs" />
-    <Compile Include="AST\Function.cs" />
-    <Compile Include="AST\FunctionDefine.cs" />
-    <Compile Include="AST\FunctionStatement.cs" />
-    <Compile Include="AST\IfStatement.cs" />
-    <Compile Include="AST\LogicExpression.cs" />
-    <Compile Include="AST\VariableExpressio.cs" />
-    <Compile Include="AST\Expression.cs" />
-    <Compile Include="AST\NumericExpression.cs" />
+    <Compile Include="AST\Cycles\Break.cs" />
+    <Compile Include="AST\Cycles\Continue.cs" />
+    <Compile Include="AST\Cycles\DoWhile.cs" />
+    <Compile Include="AST\Cycles\For.cs" />
+    <Compile Include="AST\Functions\Function.cs" />
+    <Compile Include="AST\Functions\FunctionDefine.cs" />
+    <Compile Include="AST\Functions\FunctionStatement.cs" />
+    <Compile Include="AST\Statements\IfStatement.cs" />
+    <Compile Include="AST\Expressions\LogicExpression.cs" />
+    <Compile Include="AST\Cycles\Return.cs" />
+    <Compile Include="AST\Expressions\VariableExpression.cs" />
+    <Compile Include="AST\Expressions\Expression.cs" />
+    <Compile Include="AST\Expressions\NumericExpression.cs" />
     <Compile Include="AST\Print.cs" />
-    <Compile Include="AST\Statement.cs" />
-    <Compile Include="AST\UnaryOP.cs" />
-    <Compile Include="AST\While.cs" />
+    <Compile Include="AST\Statements\Statement.cs" />
+    <Compile Include="AST\OPs\UnaryOP.cs" />
+    <Compile Include="AST\Cycles\While.cs" />
+    <Compile Include="Lib\Array.cs" />
     <Compile Include="Lib\Functions.cs" />
     <Compile Include="Lib\IFunction.cs" />
     <Compile Include="Lib\Number.cs" />
-    <Compile Include="Lib\test.cs" />
     <Compile Include="Lib\UserDefineFunction.cs" />
     <Compile Include="Lib\Value.cs" />
     <Compile Include="Lib\Variables.cs" />
@@ -82,5 +86,6 @@
   <ItemGroup>
     <Content Include="Program.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -84,6 +84,14 @@ namespace Symbolic
         }
     }
 
+    class MakeArr : IFunction
+    {
+        public Value execute(params Value[] args)
+        {
+                return new Array(args);
+        }
+    }
+
     class Cos : IFunction
     {
         public Value execute(params Value[] args)
@@ -105,6 +113,7 @@ namespace Symbolic
 
             functions.Add("sin", new Sin());
             functions.Add("cos", new Cos());
+            functions.Add("MAKEARR", new MakeArr());
             //functions.Add("echo", new Func<Value[], Value>(Echo));
         }
 

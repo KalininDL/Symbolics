@@ -30,8 +30,16 @@ namespace Symbolic
 
         public Value execute(params Value[] args)
         {
-            body.execute();
-            return Number.nil;
+            try
+            {
+                body.execute();
+                return Number.nil;
+            }
+            catch (Return ret)
+            {
+                return ret.getResult();
+            }
+            
         }
     }
 }
